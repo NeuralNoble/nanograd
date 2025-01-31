@@ -41,18 +41,33 @@ print(f"Gradient of b: {b.grad}")     # Output: 2.0
 ### 2️⃣ Building a Neural Network
 ```python
 from nanograd.nn import MLP
-import numpy as np
+xs =[
+    [2.0,3.0,-1.0],
+    [3.0,-1.0,0.5],
+    [0.5,1.0,1.0],
+    [1.0,1.0,-1.0]
+]
+ys = [1.0,-1.0,-1.0,1.0] # desired targets
 
-# Create a 2-layer neural network (2 inputs, 4 hidden, 1 output)
-model = MLP(2, [4, 1])
+for k in range(30):
+    # forward pass
+    ypred = [n(x) for x in xs]
 
-# Dummy data
-X = np.array([[1.0, 2.0]])
-y = np.array([1.0])
+    # loss calculate
+    loss = sum((yout-ygt)**2 for ygt,yout in zip(ys,ypred))
 
-# Forward pass
-pred = model.forward(X)
-print(f"Prediction: {pred}")
+    # backprop
+    for p in n.params():
+        p.grad = 0.0
+    loss.backward()
+
+    # update params
+    for p in n.params():
+        p.data += -0.1 * p.grad
+
+    print(k, loss.data)
+
+
 
 ```
 
