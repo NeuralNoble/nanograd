@@ -16,7 +16,7 @@
 You can install **Nanograd** directly from PyPI:  
 
 ```bash
-pip install nanograd
+pip install nanograd-aman==0.1.0
 ```
 
 
